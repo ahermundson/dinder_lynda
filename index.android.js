@@ -12,7 +12,7 @@ import AppContainer from './app/AppContainer'
 export default class dinder extends Component {
   render() {
     return (
-      <AppContainer />
+      <AppContainer/>
     );
   }
 }

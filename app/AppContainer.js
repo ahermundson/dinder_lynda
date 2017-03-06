@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
-import { Drawer, View } from 'native-base'
-import { Navigator } from 'react-native'
+import { Drawer } from 'native-base'
+import { Navigator, View } from 'react-native'
+
+import SideMenu from './components/sideMenu'
 
 export default class AppContainer extends Component {
   constructor(props) {
@@ -12,7 +14,7 @@ export default class AppContainer extends Component {
     }
   }
   toggleDrawer() {
-    this.state.toggled ? this._drawer.close() : this._drawer.open()
+    this.state.toggled ? this._drawer._root.close() : this._drawer._root.open()
   }
   openDrawer() {
     this.setState({toggled: true})
@@ -35,7 +37,10 @@ export default class AppContainer extends Component {
       <Drawer
         ref={(ref) => this._drawer = ref}
         type="displace"
-        content={<View style={{backgroundColor: "#000", height: 1000}}/>}
+        content={<SideMenu navigator={this._navigator}
+        theme={this.state.theme}/>}
+        side="left"
+        panOpenMask={.25}
         onClose={this.closeDrawer.bind(this)}
         onOpen={this.openDrawer.bind(this)}
         openDrawerOffset={0.2}
@@ -45,7 +50,7 @@ export default class AppContainer extends Component {
             configureScene={this.configureScene.bind(this)}
             renderScene={this.renderScene.bind(this)}
             />
-        </Drawer>
+      </Drawer>
     )
   }
 }
